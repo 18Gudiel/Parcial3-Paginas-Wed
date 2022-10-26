@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic_Table</title>
+</head>
+<body>
+    <div class="container">
+        <caption>Detalle de paises</caption>
+        <table id="dataPost">
+            <thead>
+                <tr>
+                    <th>Bandera del país</th>
+                    <th>Nombre del país</th>
+                    <th>Nombre nativo del país</th>
+                    <th>Capital del país</th>
+                    <th>La región geográfica</th>
+                    <th>Idioma nativo</th>
+                    <th>Coordenadas de localizacion</th>
+                </tr>
+            </thead>
+            <tbody id="Datafiel">
+
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+        </table>
+        
+
+    </div>
+</body>
+<!--Primero se crea un script para montar el consumo de la data table y visualizarlo/esta accion se va a llever acabo a nivel de variable
+la data se va a mandar al id="Datafiel"  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    let dataTable=document.getElementById("Datafiel");
+    
+    function getPost() {
+  return fetch("https://restcountries.com/v3.1/all");
+}
+// Se crea una funcion para mostrar los distinto elementos del post//
+function setPost(post) {
+    post.map((post,i)=>{
+        let file=document.createElement("tr");
+        let banderaPais=document.createElement("td");
+        let nombrePais=document.createElement("td");
+        let nnativoPais=document.createElement("td");
+        let capitalPais=document.createElement("td");
+        let idiomaPais=document.createElement("td");
+        let geoLocacion=document.createElement("td");
+        //aqui se va introducir los campos del post //
+        banderaPais.innerHTML=post.flags.png;
+        nombrePais.innerHTML=post.common;
+        nnativoPais.innerHTML=post.nativeName;
+        capitalPais.innerHTML=post.capital;
+        idiomaPais.innerHTML=post.languages;
+        geoLocacion.innerHTML=post.googleMaps;
+        //este codigo es usado para que la informacion sea mostrada de manera mas estetica en la columna que corresponde dada por let file=document.createElement("tr");//
+        dataTable.appendChild(file);
+        file.appendChild(banderaPais);
+        file.appendChild(nombrePais);
+        file.appendChild(nnativoPais);
+        file.appendChild(capitalPais);
+        file.appendChild(idiomaPais);
+        file.appendChild(geoLocacion);
+
+        
+     
+
+    });
+    
+    
+}
+</script>
+</html>
